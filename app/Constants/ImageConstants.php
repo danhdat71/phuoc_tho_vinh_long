@@ -15,4 +15,5 @@ final class ImageConstants
 
     const SLIDER = [1024, 750, 341, 250];
     const CONTENT = [1024, 750, 341, 250];
+    const UTIL = [1024, 750, 341, 250];
 }

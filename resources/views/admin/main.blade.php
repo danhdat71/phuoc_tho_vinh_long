@@ -25,10 +25,10 @@
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="https://www.vnkgu.edu.vn/public/images/logo.png" alt="AdminLTELogo"
                 height="60" width="60">
-        </div>
+        </div> --}}
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -61,9 +61,10 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="https://www.vnkgu.edu.vn/public/images/logo.png" alt="AdminLTE Logo"
+                <img src="" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Cẩm nang tuyển sinh</span>
+                <span class="brand-text font-weight-light">Học Laravel</span>
+                {{-- https://www.vnkgu.edu.vn/public/images/logo.png --}}
             </a>
 
             <!-- Sidebar -->
@@ -76,18 +77,27 @@
                with font-awesome or any other icon font library -->
                         <li class="nav-header">Chức năng chính</li>
                         <li class="nav-item">
-                            <a href="config" class="nav-link">
+                            <a href="slider" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Cấu hình
+                                    Slider
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="book" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
-                                <i class="nav-icon fab fa-slideshare"></i>
+                            <a href="content" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
+                                <i class="nav-icon fas fa-scroll"></i>
                                 <p>
-                                    Danh sách
+                                    Quản lý nội dung
+                                    {{-- <span class="right badge badge-info">2</span> --}}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="util" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
+                                <i class="nav-icon fas fa-gamepad"></i>
+                                <p>
+                                    Các tiện ích
                                     {{-- <span class="right badge badge-info">2</span> --}}
                                 </p>
                             </a>
@@ -161,6 +171,17 @@
             }).attr('src', "");
             let src = URL.createObjectURL(event.target.files[0]);
             $('.preview-image').css({
+                'opacity': '1'
+            }).attr('src', src);
+        });
+
+        //Preview util
+        $('.input-image-util').on('change', function(e) {
+            $('.preview-image-util').css({
+                'opacity': '0'
+            }).attr('src', "");
+            let src = URL.createObjectURL(event.target.files[0]);
+            $('.preview-image-util').css({
                 'opacity': '1'
             }).attr('src', src);
         });
