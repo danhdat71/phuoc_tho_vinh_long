@@ -218,3 +218,23 @@ $('.util-status').change(function(){
         }
     });
 });
+
+//Update icon box
+$('#save-icon-box').click(function(){
+    let html = htmlEditor.getValue();
+    $.ajax({
+        headers: headers,
+        type: "post",
+        url: "icon-box",
+        data: {
+            'html' : html
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if(res.status == true){
+                alert("Lưu lại thành công !");
+            }
+        }
+    });
+});
