@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('icon_boxs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('html')->nullable()->default(null);
+            $table->longText('html')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
         });

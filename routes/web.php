@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\IconBoxController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UtilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +35,21 @@ Route::group([
     Route::post('/content/image/update', [ContentController::class, 'updateImage']);
     Route::post('/content/status/update', [ContentController::class, 'setStatus']);
     Route::post('/content/main-content/update', [ContentController::class, 'updateMainContent']);
+    //Util
+    Route::get('/util', [UtilController::class, 'index']);
+    Route::post('/util', [UtilController::class, 'store']);
+    Route::get('/util/{util_id}/delete', [UtilController::class, 'destroy']);
+    Route::get('/util/{util_id}/get', [UtilController::class, 'show']);
+    Route::post('/util/update', [UtilController::class, 'update']);
+    Route::post('/util/status/update', [UtilController::class, 'setStatus']);
+    //Icon box
+    Route::get('/icon-box', [IconBoxController::class, 'index']);
+    Route::post('/icon-box', [IconBoxController::class, 'update']);
+    //Product
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::post('/product', [ProductController::class, 'store']);
+    Route::post('/product/{product_id}/get', [ProductController::class, 'show']);
+    Route::get('/product/{product_id}/delete', [ProductController::class, 'show']);
     //Logout
     Route::get('/logout', [AuthController::class, 'logout']);
 });

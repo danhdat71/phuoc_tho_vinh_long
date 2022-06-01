@@ -11,7 +11,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="admin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="admin/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -19,16 +19,17 @@
     <!-- summernote -->
     <link rel="stylesheet" href="admin/style.css">
     <link rel="stylesheet" href="admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="https://www.vnkgu.edu.vn/public/images/logo.png" alt="AdminLTELogo"
                 height="60" width="60">
-        </div>
+        </div> --}}
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -61,9 +62,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="https://www.vnkgu.edu.vn/public/images/logo.png" alt="AdminLTE Logo"
+                <img src="https://picsum.photos/200/200" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Cẩm nang tuyển sinh</span>
+                <span class="brand-text font-weight-light">Học Laravel</span>
             </a>
 
             <!-- Sidebar -->
@@ -76,18 +77,45 @@
                with font-awesome or any other icon font library -->
                         <li class="nav-header">Chức năng chính</li>
                         <li class="nav-item">
-                            <a href="config" class="nav-link">
+                            <a href="slider" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Cấu hình
+                                    Slider
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="book" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
-                                <i class="nav-icon fab fa-slideshare"></i>
+                            <a href="content" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
+                                <i class="nav-icon fas fa-scroll"></i>
                                 <p>
-                                    Danh sách
+                                    Quản lý nội dung
+                                    {{-- <span class="right badge badge-info">2</span> --}}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="util" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
+                                <i class="nav-icon fas fa-gamepad"></i>
+                                <p>
+                                    Các tiện ích
+                                    {{-- <span class="right badge badge-info">2</span> --}}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="icon-box" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
+                                <i class="nav-icon fas fa-icons"></i>
+                                <p>
+                                    Các icon thông tin
+                                    {{-- <span class="right badge badge-info">2</span> --}}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="product" class="nav-link @if (isset($tab) and $tab == 'slider') active-menu @endif">
+                                <i class="nav-icon fa-brands fa-product-hunt"></i>
+                                <p>
+                                    Các sản phẩm
                                     {{-- <span class="right badge badge-info">2</span> --}}
                                 </p>
                             </a>
@@ -147,6 +175,8 @@
     <script src="admin/plugins/dropzone/min/dropzone.min.js"></script>
     <script src="admin/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="admin/plugins/ckeditor/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js"></script>
     <script>
         const csrfToken = '{{ csrf_token() }}';
         const baseUrl = '{{ config('app.url') }}';
@@ -165,7 +195,24 @@
             }).attr('src', src);
         });
 
+        //Preview util
+        $('.input-image-util').on('change', function(e) {
+            $('.preview-image-util').css({
+                'opacity': '0'
+            }).attr('src', "");
+            let src = URL.createObjectURL(event.target.files[0]);
+            $('.preview-image-util').css({
+                'opacity': '1'
+            }).attr('src', src);
+        });
+
         $(".drag-table").tableDnD();
+
+        var htmlEditor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            name: "htmlmixed",
+        });
+        htmlEditor.setSize(null, 500);
     </script>
     <script src="admin/plugins/ajax.js"></script>
 </body>

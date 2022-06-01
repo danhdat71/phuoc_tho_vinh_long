@@ -116,7 +116,7 @@ $('.content-status').change(function(){
 $('.main-content').change(function(){
     let content = CKEDITOR.instances[$(this).attr('name')].getData();
     console.log(content);
-    
+
     let id = $(this).attr('data-id');
     $.ajax({
         headers: headers,
@@ -134,12 +134,24 @@ $('.main-content').change(function(){
 });
 
 //Update main content
-let newContent = null;
-let id = null;
 CKEDITOR.on("instanceCreated", function(event) {
     event.editor.on("change", function () {
-        newContent = CKEDITOR.instances[this.name].getData();
-        id = $(`#${this.name}`).attr('data-id');
+        let newContent = CKEDITOR.instances[this.name].getData();
+        let id = $(`#${this.name}`).attr('data-id');
+
+        $.ajax({
+            headers: headers,
+            type: "post",
+            url: "content/main-content/update",
+            data: {
+                id : id,
+                content : newContent
+            },
+            dataType: "json",
+            success: function (response) {
+                if(response) console.log("Ok!");
+            }
+        });
     });
 });
 //Udpate image content
@@ -166,19 +178,63 @@ $('.content-image').change(function() {
     });
 });
 
-//Lắng nghe sự kiện thay content
-window.addEventListener('click', function(){
+//Get chi tiết util
+$('.edit-util').click(function(){
+    let _this = $(this);
+    $.ajax({
+        headers: headers,
+        type: "get",
+        url: `util/${_this.attr('data-id')}/get`,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if(res.status == true){
+                $('#id').val(res.messages.id);
+                $('#name').val(res.messages.name);
+                $('#status').val(res.messages.status);
+                $('#number').val(res.messages.number);
+                $('#util-image').attr('src', res.messages.thumb_img);
+            }else{
+                alert(res.messages);
+            }
+        }
+    });
+});
+
+$('.util-status').change(function(){
+    let status = $(this).prop('checked');
+    let id = $(this).attr('data-id');
     $.ajax({
         headers: headers,
         type: "post",
-        url: "content/main-content/update",
+        url: "util/status/update",
         data: {
-            id : id,
-            content : newContent
+            'status' : status == true ? 1 : 0,
+            'id' : id
         },
         dataType: "json",
         success: function (response) {
-            if(response) console.log("Ok!");
+            if(response) console.log("Cập nhật thành công !");
+        }
+    });
+});
+
+//Update icon box
+$('#save-icon-box').click(function(){
+    let html = htmlEditor.getValue();
+    $.ajax({
+        headers: headers,
+        type: "post",
+        url: "icon-box",
+        data: {
+            'html' : html
+        },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if(res.status == true){
+                alert("Lưu lại thành công !");
+            }
         }
     });
 });

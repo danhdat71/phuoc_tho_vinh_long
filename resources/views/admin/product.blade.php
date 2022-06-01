@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sliders</h1>
+                        <h1>Sản phẩm</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -14,45 +14,41 @@
         <section class="content">
             <div class="row">
                 <div class="col-12">
-                    <form class="wrap-box-file" id="wrap-box-file">
-                        Tải lên
-                        <input id="slider-input" type="file" name="images[]" multiple accept="image/*" />
-                        <div class="loading"></div>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
                     <div class="card">
                         <div class="card-header">Danh sách hiện có</div>
                         <div class="card-body">
-                            <form action="slider" class="d-flex align-items-center">
-                                <div class="form-group mr-2">
-                                    <label for="">Trạng thái</label>
-                                    <select name="status" id="" class="form-control">
-                                        <option value="all">Tất cả</option>
-                                        <option value="0">Ẩn</option>
-                                        <option value="1">Hiện</option>
-                                    </select>
+                            <div class="d-flex" style="justify-content: space-between; align-items:center">
+                                <form action="" method="get" class="d-flex align-items-center">
+                                    <div class="form-group mr-2">
+                                        <label for="">Trạng thái</label>
+                                        <select name="status" id="" class="form-control">
+                                            <option value="all">Tất cả</option>
+                                            <option value="0">Ẩn</option>
+                                            <option value="1">Hiện</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mr-2">
+                                        <label for="">Sắp xếp</label>
+                                        <select name="order_by" class="form-control">
+                                            <option value="id|desc">Mới nhất</option>
+                                            <option value="id|asc">Cũ nhất</option>
+                                            <option value="status|desc">Hiện trước</option>
+                                            <option value="status|asc">Ẩn trước</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button
+                                            style="transform: translateY(15px)"
+                                            class="btn btn-info"
+                                        >
+                                            <i class="fas fa-filter"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="pt-2">
+                                    <button data-toggle="modal" data-target="#add" class="btn btn-info btn-sm">Tạo mới <i class="fa-solid fa-plus"></i></button>
                                 </div>
-                                <div class="form-group mr-2">
-                                    <label for="">Sắp xếp</label>
-                                    <select name="order_by" class="form-control">
-                                        <option value="id|desc">Mới nhất</option>
-                                        <option value="id|asc">Cũ nhất</option>
-                                        <option value="status|desc">Hiện trước</option>
-                                        <option value="status|asc">Ẩn trước</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <button
-                                        style="transform: translateY(15px)"
-                                        class="btn btn-info"
-                                    >
-                                        <i class="fas fa-filter"></i>
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                             <table id="main-table">
                                 <thead>
                                     <tr>
@@ -64,7 +60,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sliders as $item)
+                                    {{-- @foreach ($sliders as $item)
                                         <tr data-id="{{ $item->id }}">
                                             <td>{{ $item->id }}</td>
                                             <td>
@@ -92,20 +88,41 @@
                                                     class="btn btn-sm btn-danger">Xóa</a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                             <div class="pt-4">
-                                {{
+                                {{-- {{
                                     $sliders
                                         ->appends($request)
                                         ->links("pagination::bootstrap-4")
-                                }}
+                                }} --}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        Modal BODY
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 @endsection
